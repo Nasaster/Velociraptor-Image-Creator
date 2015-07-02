@@ -4,12 +4,16 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglifyjs = require('gulp-uglify'),
     minifycss = require('gulp-minify-css'),
+    sass = require('gulp-sass') ,
     ngTemplateCache = require('gulp-angular-templatecache');
 
 var paths = {
+    // destination (output) folders
     dest: 'public',
     destScripts: 'public/js',
-    styles: ['source/**/*.css'],
+    destStyles: 'public/css',
+    // source files
+    styles: 'source/css',
     scripts: ['source/**/*.js'],
     templates: ['source/**/*.html', '!source/index.html'],
     main_page: ['source/index.html']
@@ -17,8 +21,8 @@ var paths = {
 
 gulp.task('vendor.scripts', function() {
     var files = [
-        'bower_components/angular/angular.min.js',
-        'bower_components/angular-route/angular-route.min.js'
+        'node_modules/angular/angular.min.js',
+        'node_modules/angular-route/angular-route.min.js'
     ];
     return gulp.src(files)
         .pipe(concat('vendor.js'))
@@ -38,10 +42,9 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('styles', function() {
-    return gulp.src(paths.styles)
-        .pipe(concat('app.css'))
-        //.pipe(minifycss())
-        .pipe(gulp.dest(paths.dest));
+    return gulp.src(paths.styles + '/layout.scss')
+         .pipe(sass() )
+         .pipe(gulp.dest( paths.destStyles )); 
 });
 
 gulp.task('templates', function() {
@@ -54,7 +57,7 @@ gulp.task('build', ['vendor.scripts', 'scripts', 'styles', 'templates', 'main_pa
 
 gulp.task('server', ['build'], function() {
     gulp.watch(paths.main_page, ['main_page']);
-    gulp.watch(paths.styles, ['styles']);
+    gulp.watch([paths.styles + "/**/*.scss"], ['styles']);
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(paths.templates, ['templates']);
 
