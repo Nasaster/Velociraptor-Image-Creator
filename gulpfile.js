@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    addStream = require('add-stream'),
     webserver = require('gulp-webserver'),
     watch = require('gulp-watch'),
     concat = require('gulp-concat'),
@@ -12,8 +13,10 @@ var paths = {
     dest: 'public',
     destScripts: 'public/js',
     destStyles: 'public/css',
+    destAssets: 'public/assets',
     // source files
     styles: 'source/css',
+    assets: ['source/assets/**/*'],
     scripts: ['source/**/*.js'],
     templates: ['source/**/*.html', '!source/index.html'],
     main_page: ['source/index.html']
@@ -21,7 +24,7 @@ var paths = {
 
 gulp.task('vendor.scripts', function() {
     var files = [
-        'node_modules/angular/angular.min.js',
+        'node_modules/angular/angular.js',
         'node_modules/angular-route/angular-route.min.js'
     ];
     return gulp.src(files)
@@ -29,13 +32,26 @@ gulp.task('vendor.scripts', function() {
         .pipe(gulp.dest(paths.destScripts));
 });
 
+// create index.html and includes all referenced templates
+
 gulp.task('main_page', function() {
     return gulp.src(paths.main_page)
         .pipe(gulp.dest(paths.dest));
 });
 
+// copy all assets into the destination directory
+
+gulp.task('assets', function() {
+    return gulp.src(paths.assets)
+        .pipe(gulp.dest(paths.destAssets));
+});
+
+// concatenate all our source scripts into a single file
+// this is basically OUR ANGULAR APP
+
 gulp.task('scripts', function() {
     return gulp.src(paths.scripts)
+        .pipe(addStream.obj( prepareTemplates() ))
         .pipe(concat('app.js'))
         //.pipe(uglifyjs())
         .pipe(gulp.dest(paths.destScripts));
@@ -47,19 +63,15 @@ gulp.task('styles', function() {
          .pipe(gulp.dest( paths.destStyles )); 
 });
 
-gulp.task('templates', function() {
-    return gulp.src(paths.templates)
-        .pipe(ngTemplateCache())
-        .pipe(gulp.dest(paths.dest));
-});
+gulp.task('build', ['vendor.scripts', 'scripts', 'assets', 'styles', 'main_page']);
 
-gulp.task('build', ['vendor.scripts', 'scripts', 'styles', 'templates', 'main_page']);
+// TODO : create production build (with minimized Angular and uglified source code)
 
 gulp.task('server', ['build'], function() {
     gulp.watch(paths.main_page, ['main_page']);
     gulp.watch([paths.styles + "/**/*.scss"], ['styles']);
     gulp.watch(paths.scripts, ['scripts']);
-    gulp.watch(paths.templates, ['templates']);
+    gulp.watch(paths.templates, ['scripts']);
 
     var options = {
         livereload: true,
@@ -70,3 +82,13 @@ gulp.task('server', ['build'], function() {
 });
 
 gulp.task('default', ['build']);
+
+// helper functions
+
+// compile Angular templates from views folder
+
+function prepareTemplates() {
+    return gulp.src(paths.templates)
+        .pipe(ngTemplateCache( 'templates.js', { module : 'templates', standalone: true }))
+        .pipe(gulp.dest(paths.destScripts));
+}

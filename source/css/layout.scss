@@ -2,4 +2,30 @@
 
 body {
 	// custom styles here.
+	
+	li 
+	{
+		list-style: none;
+	}
+
+	.row
+	{
+		margin-left: -10px;
+	}
+
+	.img-rounded
+	{ 
+  		border-radius: 6px;
+  		border: 5px solid #000000;  
+	}
+
+	.main-border
+	{
+		border-radius: 7px 99px 90px 0px;
+		-moz-border-radius: 7px 99px 90px 0px;
+		-webkit-border-radius: 7px 99px 90px 0px;
+		border: 5px solid #000000;
+
+		background-color: #a5b59a;
+	}  
 }
