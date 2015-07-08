@@ -1,28 +1,29 @@
 <!-- Grid content properties  -->
 <div class="row">
-    <div class="form-group col-xs-6 col-sm-4">
+    <div class="form-group col-xs-6 col-sm-6">
         <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Grid generator: </label>
+            <input type="radio" ng-model="radioSelect" value="grid"> Grid generator: </label>
         <ul>
             <li>
                 <label> Grid color: </label>
-                <input type="text" class="form-control input-normal" placeholder="" aria-describedby="sizing-addon3">
             </li>
         </ul>
         <ul>
             <li>
-                <select class="form-control">
+                <input type="text" class="form-control paok">
+                <select class="form-control paok">
                     <option value="">pixel</option>
                     <option value="">inch</option>
                 </select>
+            </li>
             </li>
         </ul>
         <ul>
             <li>
                 <label> Small step: </label>
-                <input type="text" class="form-control input-normal" placeholder="" aria-describedby="sizing-addon3">
+                <input type="text" class="form-control input-normal" name="smallStep" ng-model="small.Step">
                 <label> Large step: </label>
-                <input type="text" class="form-control input-normal" placeholder="" aria-describedby="sizing-addon3">
+                <input type="text" class="form-control input-normal" name="largeStep" ng-model="large.Step">
             </li>
         </ul>
     </div>

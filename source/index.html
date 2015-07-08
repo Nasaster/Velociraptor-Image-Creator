@@ -9,13 +9,15 @@
 
 <body ng-app="Velociraptor">
     <div class="container col-xs-12 col-sm-6 col-md-6">
-        <div ng-controller="VelociraptorForm">
-            <form class="main-border" role="form">
+        <div>
+            <form class="main-border" role="form" name="myForm" ng-controller="VelociraptorForm as ctrl" ng-submit="ctrl.submit()">
                 <form-Size></form-Size>
                 <form-Type></form-Type>
                 <form-Colors></form-Colors>
                 <form-Filltype></form-FillType>
                 <form-Grid></form-Grid>
+                <tt>Radio Selection = {{radioSelect | json}}</tt><br/>
+                <button class="btn btn-primary" type="submit" data-ng-click="submit(myForm)">Submit</button>
             </form>
         </div>
     </div>

@@ -1,23 +1,17 @@
 <!-- Insert a value pixel or inch -->
 <div class="row">
-    <div class="form-inline form group">
-        <div class="form-group col-xs-6 col-sm-8">
-            <h4> Size: </h4>
-            <ul>
-                <li>
-                    <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3" ng-model="example.text">
-                    <h4> X </h4>
-                    <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3" ng-model="example.text">
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <select class="form-control">
-                        <option value="">pixel</option>
-                        <option value="">inch</option>
-                    </select>
-                </li>
-            </ul>
-        </div>
+    <div class="col-xs-6 col-md-8">
+        <label> Size: </label>
+        <ul>
+            <li>
+                <input type="number" class="form-control paok" ng-model="ctrl.model.width" required>
+                <label>x</label>
+                <input type="number" class="form-control paok" ng-model="ctrl.model.height" required>
+                <select class="form-control" ng-model="ctrl.model.unit">
+                    <option value="px">pixel</option>
+                    <option value="in">inch</option>
+                </select>
+            </li>
+        </ul>
     </div>
 </div>

@@ -16,7 +16,8 @@ body {
 	.img-rounded
 	{ 
   		border-radius: 6px;
-  		border: 5px solid #000000;  
+  		border: 5px solid #000000;
+  		max-width: 200px;  
 	}
 
 	.main-border
@@ -27,5 +28,28 @@ body {
 		border: 5px solid #000000;
 
 		background-color: #a5b59a;
-	}  
+	}
+
+	.input-group-btn
+	{
+  		margin-left: -1px;
+  		width: 10px;
+	}
+
+	.paok
+	{
+		width: 100px;
+		display: inline-flex;
+	}
+
+	.aris
+	{
+		display: inline-flex;
+		margin: 10px;
+	}
+
+	#btn
+	{
+		margin-right: 10px;
+	}
 }

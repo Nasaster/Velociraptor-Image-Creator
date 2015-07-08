@@ -3,7 +3,7 @@
     <div class="form group col-xs-6 col-sm-4">
         <p> <u>Noise content properties </u> </p>
         <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> Noise </label>
+            <input type="radio" ng-model="radioSelect" value="noise" checked> Noise </label>
         <ul>
             <li>
                 <select class="form-control">
@@ -15,11 +15,11 @@
         <ul>
             <li>
                 <label> Vertical Column Color: </label>
-                <input type="text" class="form-control input-normal" placeholder="" aria-describedby="sizing-addon3">
+                <input type="text" class="form-control input-normal" name="width" ng-model="vertical.Size" >
             </li>
             <li>
                 <label> Horizontal Column Color: </label>
-                <input type="text" class="form-control input-normal" placeholder="" aria-describedby="sizing-addon3">
+                <input type="text" class="form-control input-normal" name="width" ng-model="horizontal.Size">
             </li>
         </ul>
     </div>

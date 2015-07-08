@@ -3,7 +3,7 @@
     <div class="form group col-xs-6 col-sm-4">
         <p> <u>Color content properties</u> </p>
         <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> Solid color </label>
+            <input type="radio" ng-model="radioSelect" value="solid" checked> Solid color </label>
     </div>
 </div>
 
@@ -11,17 +11,17 @@
 <div class="row">
     <div class="form-group col-xs-6 col-sm-4">
         <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> Random color </label>
+            <input type="radio" ng-model="radioSelect" value="random" checked> Random color </label>
         <ul>
             <li>
                 <label for=""> Hex Color: </label>
-                <textarea class="form-control" rows="5" id=""></textarea>
+                <textarea class="form-control" rows="5" ng-model="ctrl.model.hex" ng-list=","></textarea>
             </li>
         </ul>
         <ul>
             <li>
                 <label> Radius: </label>
-                <input type="text" class="form-control input-normal" placeholder="" aria-describedby="sizing-addon3">
+                <input type="text" class="form-control input-normal" name="radius" ng-model="radius.Size">
             </li>
         </ul>
     </div>
