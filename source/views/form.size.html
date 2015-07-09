@@ -1,13 +1,14 @@
 <!-- Insert a value pixel or inch -->
 <div class="row">
-    <div class="col-xs-6 col-md-8">
+    <div class="col-xs-6 col-md-12">
         <label> Size: </label>
         <ul>
             <li>
+                <label>Width:</label>
                 <input type="number" class="form-control paok" ng-model="ctrl.model.width" required>
-                <label>x</label>
+                <label>Height:</label>
                 <input type="number" class="form-control paok" ng-model="ctrl.model.height" required>
-                <select class="form-control" ng-model="ctrl.model.unit">
+                <select class="form-control paok" ng-model="ctrl.model.unit">
                     <option value="px">pixel</option>
                     <option value="in">inch</option>
                 </select>

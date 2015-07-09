@@ -1,8 +1,8 @@
 <!-- Grid content properties  -->
 <div class="row">
-    <div class="form-group col-xs-6 col-sm-6">
+    <div class="form-group col-xs-6 col-sm-12">
         <label>
-            <input type="radio" ng-model="radioSelect" value="grid"> Grid generator: </label>
+            <input type="checkbox" ng-model="ctrl.model.grid"> Grid generator: </label>
         <ul>
             <li>
                 <label> Grid color: </label>
@@ -10,20 +10,15 @@
         </ul>
         <ul>
             <li>
-                <input type="text" class="form-control paok">
-                <select class="form-control paok">
-                    <option value="">pixel</option>
-                    <option value="">inch</option>
-                </select>
-            </li>
-            </li>
-        </ul>
-        <ul>
-            <li>
+                <input type="text" class="form-control paok" ng-model="ctrl.model.gridColor" required>
                 <label> Small step: </label>
-                <input type="text" class="form-control input-normal" name="smallStep" ng-model="small.Step">
+                <input type="text" class="form-control input-normal paok" ng-model="ctrl.model.smallStep" required>
                 <label> Large step: </label>
-                <input type="text" class="form-control input-normal" name="largeStep" ng-model="large.Step">
+                <input type="text" class="form-control input-normal paok" ng-model="ctrl.model.largeStep" required>
+                <select class="form-control paok" ng-model="ctrl.model.unit">
+                    <option value="px">pixel</option>
+                    <option value="in">inch</option>
+                </select>
             </li>
         </ul>
     </div>

@@ -48,8 +48,20 @@ body {
 		margin: 10px;
 	}
 
-	#btn
+	// .btn
+	// {
+	// 	position: absolute;
+ //    	top: 50%;
+	// }
+
+	.btn
 	{
-		margin-right: 10px;
+    	text-align: center;
+    	margin: 10px;
+	}
+
+	.canvas
+	{
+		background-color: black;
 	}
 }

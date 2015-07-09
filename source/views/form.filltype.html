@@ -6,20 +6,20 @@
             <input type="radio" ng-model="radioSelect" value="noise" checked> Noise </label>
         <ul>
             <li>
-                <select class="form-control">
-                    <option value="">gradient</option>
-                    <option value="">checker</option>
+                <select class="form-control paok" ng-model="ctrl.model.noiseType">
+                    <option value="gradient">gradient</option>
+                    <option value="checker">checker</option>
                 </select>
             </li>
         </ul>
         <ul>
             <li>
                 <label> Vertical Column Color: </label>
-                <input type="text" class="form-control input-normal" name="width" ng-model="vertical.Size" >
+                <input type="text" class="form-control input-normal" ng-model="ctrl.model.vertColumn" required>
             </li>
             <li>
                 <label> Horizontal Column Color: </label>
-                <input type="text" class="form-control input-normal" name="width" ng-model="horizontal.Size">
+                <input type="text" class="form-control input-normal" ng-model="ctrl.model.horizColmn" required>
             </li>
         </ul>
     </div>
