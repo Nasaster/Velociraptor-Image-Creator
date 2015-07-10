@@ -37,8 +37,8 @@ app.controller('VelociraptorForm', ['$scope', function($scope)
 	    return {
 	        restrict: 'E',
 	        scope: {
-	            progress: '=',
-	            progressId: '@'
+	            progress: '=', 		//set up progress to accept data-binding
+	            progressId: '@'		// the progressId uses the data-binding from the parent scope
 	        },
 	        template: "<canvas id='pgcanvas' width='400' height='400'>",
 	        link: function(scope, element, attrs) {
