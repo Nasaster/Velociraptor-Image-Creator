@@ -32,29 +32,30 @@ app.controller('VelociraptorForm', ['$scope', function($scope)
 
 		//console.log( "VelociraptorForm is active!!" );
 }]);
-	app.directive("canvasField", function ()
-  	{
-	    return {
-	        restrict: 'E',
-	        scope: {
-	            progress: '=', 		//set up progress to accept data-binding
-	            progressId: '@'		// the progressId uses the data-binding from the parent scope
-	        },
-	        template: "<canvas id='pgcanvas' width='400' height='400'>",
-	        link: function(scope, element, attrs) {
-	           console.log(element);
-	           scope.canvas = element.find('canvas')[0];
-	           scope.context = scope.canvas.getContext('2d');
-	 
-	           scope.$watch('progress', function(newValue) {
-	             barWidth = Math.ceil(newValue / 100 * scope.canvas.width);
-	             scope.context.fillStyle = "#DDD";
-	             scope.context.fillRect(0, 0, scope.canvas.width, scope.canvas.height);
-	             scope.context.fillStyle = "#F00";
-	             scope.context.fillRect(0, 0, barWidth, scope.canvas.height);
-	           });
-	        }        
-		};
-	});
 
 
+
+app.directive("canvasField", function ()
+	{
+    return {
+        restrict: 'E',
+        scope: {
+            progress: '=', 		//set up progress to accept data-binding
+            progressId: '@'		// the progressId uses the data-binding from the parent scope
+        },
+        template: "<canvas id='pgcanvas' width='400' height='400'>",
+        link: function(scope, element, attrs) {
+           console.log(element);
+           scope.canvas = element.find('canvas')[0];
+           scope.context = scope.canvas.getContext('2d');
+ 
+           scope.$watch('progress', function(newValue) {
+             barWidth = Math.ceil(newValue / 100 * scope.canvas.width);
+             scope.context.fillStyle = "#DDD";
+             scope.context.fillRect(0, 0, scope.canvas.width, scope.canvas.height);
+             scope.context.fillStyle = "#F00";
+             scope.context.fillRect(0, 0, barWidth, scope.canvas.height);
+           });
+        }        
+	};
+});

@@ -11,10 +11,10 @@
     </section> -->
 
 
+<div ng-controller="VelociraptorPreview" class="row">
 
-
-
-
+    <div class="test" ng-random-class ng-classes="classes"></div>
+ </div>
 
 
 
@@ -26,7 +26,16 @@
 
 
 
+<div class="row">
+        <canvas id="canvas" width="500" height="200"></canvas>
+    </div>
+    <div ng-controller="VelociraptorPreview" class="row">
+        <div class="span5 well">
+          <input id="first" type="text" ng-model="square.height" class="span2"/>
 
+          <input id="second" type="text" ng-model="square.width" class="span2"/>
+      </div>
+</div>    
 
 
 
