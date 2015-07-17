@@ -1,65 +1,26 @@
-<!-- Preview -->
-<!-- <div class="container col-xs-6 col-md-4" ng-controller="VelociraptorPreview">
-    <section class="img-preview" id="img-preview">
-        <div class="row">
-            <div class="col-xs-6 col-sm-4">
-                <label>Preview:</label> -->
-                <!-- <img src="./assets/img/batman.jpg" alt="" class="img-rounded"> -->
-                <!-- <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;"></canvas> -->
-<!--             </div>
-        </div>
-    </section> -->
-
-
-<div ng-controller="VelociraptorPreview" class="row">
-
-    <div class="test" ng-random-class ng-classes="classes"></div>
- </div>
-
-
-
-
-
- <div ng-controller="VelociraptorPreview" ng-controller="VelociraptorForm">
-    <canvas width="200" height="200" circle-draw></canvas>
-  </div>
-
-
-
+                                                            <!-- Preview -->
+<!-- Image canvas -->
 <div class="row">
-        <canvas id="canvas" width="500" height="200"></canvas>
-    </div>
-    <div ng-controller="VelociraptorPreview" class="row">
-        <div class="span5 well">
-          <input id="first" type="text" ng-model="square.height" class="span2"/>
-
-          <input id="second" type="text" ng-model="square.width" class="span2"/>
-      </div>
-</div>    
-
-
-
-
-
-
-
-<!-- Preview -->
-
-<div>
-    <canvas-field progress="object.progress" progress-id="helloworld"></canvas-field>
-    <br/><br/>
-    <input ng-model="object.progress"></input>
-    <input ng-model="object.progress"></input>
+    <section class="img-preview" ng-controller="VelociraptorPreview">
+        <ul>
+            <li>
+                <label>Preview:</label>
+            </li>
+            <li>
+                <canvas id="canvas" width="100" height="100" class="box"></canvas>
+            </li>
+        </ul>
+    </section>
 </div>
-
-
-
-
-
-
 <!-- Preview buttons -->
+<div class="row">
     <section class="aris">
-        <button class="btn btn-primary btn" data-role="fullview">FullView</button>
-        <button class="btn btn-primary btn" data-role="download">Download</button>
+        <ul>
+            <li>
+                <!-- <a href="" id="download" download="canvasexport.png" ng-controller="VelociraptorPreview">PPP</a> -->
+                <button class="btn btn-primary btn" data-role="fullview">FullView</button>
+                <button class="btn btn-primary btn" data-role="download">Download</button>
+            </li>
+        </ul>
     </section>
 </div>

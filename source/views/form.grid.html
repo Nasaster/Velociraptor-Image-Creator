@@ -6,19 +6,15 @@
         <ul>
             <li>
                 <label> Grid color: </label>
+                <input type="color" class="form-control paok" ng-model="ctrl.model.gridColor">
             </li>
         </ul>
         <ul>
             <li>
-                <input type="text" class="form-control paok" ng-model="ctrl.model.gridColor" required>
                 <label> Small step: </label>
-                <input type="text" class="form-control input-normal paok" ng-model="ctrl.model.smallStep" required>
+                <input type="text" class="form-control paok" ng-model="ctrl.model.smallStep">
                 <label> Large step: </label>
-                <input type="text" class="form-control input-normal paok" ng-model="ctrl.model.largeStep" required>
-                <select class="form-control paok" ng-model="ctrl.model.unit">
-                    <option value="px">pixel</option>
-                    <option value="in">inch</option>
-                </select>
+                <input type="text" class="form-control paok" ng-model="ctrl.model.largeStep">
             </li>
         </ul>
     </div>

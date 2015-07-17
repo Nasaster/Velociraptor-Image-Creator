@@ -1,25 +1,26 @@
 <!-- Noise content properties  -->
 <div class="row">
     <div class="form group col-xs-6 col-sm-4">
-        <p> <u>Noise content properties </u> </p>
-        <label>
-            <input type="radio" ng-model="radioSelect" value="noise" checked> Noise </label>
+        <p> 
+            <u>Pattern properties </u> 
+        </p>
+        <p>
+            <label>
+                <input type="radio" ng-model="ctrl.model.fillType" value="noise"> Noise
+            </label>
+        </p>
+    
+        <p>
+            <label>
+                <input type="checkbox" ng-model="ctrl.model.checkered"> Checkered
+            </label>
+        </p>
         <ul>
             <li>
-                <select class="form-control paok" ng-model="ctrl.model.noiseType">
-                    <option value="gradient">gradient</option>
-                    <option value="checker">checker</option>
-                </select>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <label> Vertical Column Color: </label>
-                <input type="text" class="form-control input-normal" ng-model="ctrl.model.vertColumn" required>
-            </li>
-            <li>
-                <label> Horizontal Column Color: </label>
-                <input type="text" class="form-control input-normal" ng-model="ctrl.model.horizColmn" required>
+                <label>Amount of rows (when checkered) </label>
+                <input type="number" class="form-control input-normal paok" ng-model="ctrl.model.rowAmount">
+                <label>Amount of columns (when checkered): </label>
+                <input type="number" class="form-control input-normal paok" ng-model="ctrl.model.columnAmount">
             </li>
         </ul>
     </div>

@@ -3,28 +3,22 @@
     <div class="form group col-xs-6 col-sm-4">
         <p> <u>Color content properties</u> </p>
         <label>
-            <input type="radio" ng-model="radioSelect" value="solid" checked> Solid color </label>
+            <input type="radio" ng-model="ctrl.model.fillType" value="solid" checked> Solid color </label>
+            <input type="color" class="form-control paok" ng-model="ctrl.model.solidColor">
         <ul>
             <li>
-                <input type="text" class="form-control paok" ng-model="ctrl.model.solidColor" required>
+                
             </li>
         </ul>
     </div>
 </div>
 <div class="row">
     <div class="form-group col-xs-6 col-sm-4">
-        <label>
-            <input type="radio" ng-model="radioSelect" value="random" checked> Random color </label>
-        <ul>
-            <li>
-                <label for=""> Hex or Rgb Color: </label>
-                <textarea class="form-control" rows="5" ng-model="ctrl.model.randColor" ng-list=","></textarea>
-            </li>
-        </ul>
+        <label><input type="radio" ng-model="ctrl.model.fillType" value="random" checked> Random color </label>
         <ul>
             <li>
                 <label> Radius: </label>
-                <input type="number" class="form-control input-normal paok" ng-controller="VelociraptorPreview" ng-model="ctrl.model.radius" required>
+                <input type="number" class="form-control paok" ng-model="ctrl.model.radius">
             </li>
         </ul>
     </div>

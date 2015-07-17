@@ -16,7 +16,7 @@
                 <form-Colors></form-Colors>
                 <form-Filltype></form-FillType>
                 <form-Grid></form-Grid>
-                <tt>Radio Selection = {{radioSelect | json}}</tt><br/>
+                <!-- <tt>Radio Selection = {{radioSelect | json}}</tt><br/> -->
                 <button class="btn btn-primary btn" type="submit" data-ng-click="submit(myForm)">Submit</button>
             </form>
         </div>
@@ -24,6 +24,9 @@
     <div class="container col-xs-6 col-md-4">
         <preview></preview>
     </div>
+    
+    <!-- used to calculate pixels per inch -->
+    <div class="inch"></div>
     
     <!-- Third party libraries -->
     <script src="js/vendor.js"></script>
