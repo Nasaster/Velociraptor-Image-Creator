@@ -9,11 +9,11 @@ app.controller('VelociraptorForm', [ '$rootScope', '$scope', function( $rootScop
 
 		transparent: false,
 		solidColor: '',
-		randColor: getRandomColor(),
-		radius: 20,
+		radius: 0,
 
 		rowAmount: 5,
 		columnAmount: 5,
+		blockColor: '',
 
 		noiseType: 'gradient',
 		checkered: false,
@@ -23,19 +23,7 @@ app.controller('VelociraptorForm', [ '$rootScope', '$scope', function( $rootScop
 		grid: false,
 		gridColor: '',
 		smallStep: 5,
-		largeStep: 10
-		
-	};
-	// Random Color function 
-	function getRandomColor() 
-	{
-    	var letters = '0123456789ABCDEF'.split('');
-    	var color = '#';
-    		for (var i = 0; i < 6; i++ ) 
-    		{
-        		color += letters[Math.floor(Math.random() * 16)];
-    		}
-    		return color;
+		largeStep: 10		
 	};
 
 	// function invoked when the form is submitted

@@ -2,8 +2,9 @@
 
 app.controller('VelociraptorPreview', function($scope, renderer) 
 {
-	var canvas = document.getElementById( "canvas" ),
-	    ctx    = canvas.getContext( "2d" );
+	var canvas        = document.getElementById( "canvas" ),
+	    ctx           = canvas.getContext( "2d" ),
+	    isTransparent = false;
      
 	// invoked whenever the FormController broadcasts a form submit
 	// over the $rootScope
@@ -18,6 +19,8 @@ app.controller('VelociraptorPreview', function($scope, renderer)
 
 	 	canvas.width  = data.width;
     	canvas.height = data.height;
+	 	isTransparent = data.transparent;
+	 	var radius    = ( data.width / 2 ) * ( data.radius / 100 ); // maximum radius is half the width of the image !!
 
     	//clear the canvas
         ctx.clearRect( 0, 0, canvas.width, canvas.height );	
@@ -27,11 +30,11 @@ app.controller('VelociraptorPreview', function($scope, renderer)
 	 	switch ( data.fillType )
 	 	{
 	 		case "solid":
-	 			renderer.drawSquare( ctx, 0, 0, data.width, data.height, data.solidColor );
+	 			renderer.drawSquare( ctx, 0, 0, data.width, data.height, data.solidColor, radius );
 	 			break;
 
  			case "random":
-				renderer.drawSquare( ctx, 0, 0, data.width, data.height, "#" + Math.floor( Math.random() * 0xFFFFFF ).toString( 16 ));
+				renderer.drawSquare( ctx, 0, 0, data.width, data.height, "#" + Math.floor( Math.random() * 0xFFFFFF ).toString( 16 ), radius );
  				break;
 
 			case "noise":
@@ -42,7 +45,7 @@ app.controller('VelociraptorPreview', function($scope, renderer)
 
 	 	if ( data.checkered ) {
 
-	 		renderer.createCheckeredPattern( ctx, data.width, data.height, data.rowAmount, data.columnAmount, data.solidColor );
+	 		renderer.createCheckeredPattern( ctx, data.width, data.height, data.rowAmount, data.columnAmount, data.blockColor );
 	 	}
 
 	 	if ( data.grid ) {
@@ -88,20 +91,31 @@ app.controller('VelociraptorPreview', function($scope, renderer)
 		return data;
 	}
 
+	function grabImage()
+	{
+		if ( canvas && ctx ) 
+        {
+        	// grab canvas image contents as either PNG (transparent) or JPEG
+            return canvas.toDataURL( isTransparent ? "image/png" : "image/jpeg" );
+        }	
+	}
+
 	// function exportCanvas( canvas, ctx)
- //    {
- //        if( canvas &amp;&amp; ctx ) 
- //        {
- //            var img = canvas.toDataURL("image/png;base64;");
- //            anchor = document.getElementById("download");
- //            anchor.href = img;
- //            anchor.innerHTML = "Download";
-	//     }
-	//     else 
-	//     {
- //             alert("Can not export");
- //        }
-	// }
+    document.getElementById( "download" ).onclick = function( e )
+	{
+        // create anchor element that will download file through browser
+        var anchor = document.createElement( "a" );
+        anchor.href = grabImage();
+        // create random filename
+        anchor.download = "VelociraptorImage_" + Date.now() + ( isTransparent ? ".png" : ".jpg" );
+        anchor.click();
+	}
+
+	// full view
+	document.getElementById( "fullview" ).onclick = function( e )
+	{
+		window.open( grabImage(), "_blank" );
+	};
 });
 
 app.factory('renderer', function()
@@ -144,7 +158,7 @@ app.factory('renderer', function()
     			for ( var column = 0; column < amountOfColumns; ++column )
     			{
     				if ( fill ) {
-	    				renderer.drawSquare( ctx, column * blockWidth, row * blockHeight, blockWidth, blockHeight, blockColor );
+	    				renderer.drawSquare( ctx, column * blockWidth, row * blockHeight, blockWidth, blockHeight, blockColor, 0 );
     				}
     				fill = !fill;
     			}
@@ -181,12 +195,28 @@ app.factory('renderer', function()
         /**
          * draw the square on the canvas
          */
-        drawSquare : function( ctx, x, y, width, height, color ) 
+        drawSquare : function( ctx, x, y, width, height, color, radius ) 
         {
             console.log("square to draw: " + width + "x" + height + " at " + x + " x " + y );
             
             ctx.fillStyle = color;
-            ctx.fillRect( x, y, width, height);
+            //ctx.fillRect( x, y, width, height);
+        
+			if (typeof radius === "undefined") {
+			  radius = 0;
+			}
+			ctx.beginPath();
+			ctx.moveTo(x + radius, y);
+			ctx.lineTo(x + width - radius, y);
+			ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+			ctx.lineTo(x + width, y + height - radius);
+			ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+			ctx.lineTo(x + radius, y + height);
+			ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+			ctx.lineTo(x, y + radius);
+			ctx.quadraticCurveTo(x, y, x + radius, y);
+			ctx.closePath();
+		    ctx.fill();
         },
 
         triangle: function( ctx, width, height, color, randomColor)

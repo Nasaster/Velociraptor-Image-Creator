@@ -17,8 +17,8 @@
         <label><input type="radio" ng-model="ctrl.model.fillType" value="random" checked> Random color </label>
         <ul>
             <li>
-                <label> Radius: </label>
-                <input type="number" class="form-control paok" ng-model="ctrl.model.radius">
+                <label> Radius (percentage): </label>
+                <input type="number" class="form-control paok" min="0" max="100" ng-model="ctrl.model.radius">
             </li>
         </ul>
     </div>
