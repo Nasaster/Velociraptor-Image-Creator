@@ -1,15 +1,11 @@
 <!-- Color content properties -->
 <div class="row">
-    <div class="form group col-xs-6 col-sm-4">
+    <div class="form group col-xs-6 col-sm-6">
         <p> <u>Color content properties</u> </p>
         <label>
             <input type="radio" ng-model="ctrl.model.fillType" value="solid" checked> Solid color </label>
             <input type="color" class="form-control paok" ng-model="ctrl.model.solidColor">
-        <ul>
-            <li>
-                
-            </li>
-        </ul>
+            <label><code class="terminator">{{ctrl.model.solidColor}}</code></label>
     </div>
 </div>
 <div class="row">

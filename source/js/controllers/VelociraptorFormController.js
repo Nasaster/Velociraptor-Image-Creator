@@ -1,5 +1,7 @@
 app.controller('VelociraptorForm', [ '$rootScope', '$scope', function( $rootScope, $scope)
 {
+	this.name = "VelociraptorForm";
+
 	// the model specifiying what the data looks like
 
 	this.model = {
@@ -8,20 +10,22 @@ app.controller('VelociraptorForm', [ '$rootScope', '$scope', function( $rootScop
 		unit: 'px',
 
 		transparent: false,
-		solidColor: '',
+		solidColor: '#7bbf60',
 		radius: 0,
 
 		rowAmount: 5,
 		columnAmount: 5,
-		blockColor: '',
+		blockColor: '#000000',
 
-		noiseType: 'gradient',
+		//noiseType: 'gradient',
 		checkered: false,
-		vertColumn: '',
-		horizColmn: '',
+		//vertColumn: '',
+		//horizColmn: '',
+
+		stw:'1',
 
 		grid: false,
-		gridColor: '',
+		gridColor: '#000000',
 		smallStep: 5,
 		largeStep: 10		
 	};

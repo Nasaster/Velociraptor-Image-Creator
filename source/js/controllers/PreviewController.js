@@ -2,6 +2,8 @@
 
 app.controller('VelociraptorPreview', function($scope, renderer) 
 {
+	//$scope.name = "VelociraptorPreview";
+
 	var canvas        = document.getElementById( "canvas" ),
 	    ctx           = canvas.getContext( "2d" ),
 	    isTransparent = false;

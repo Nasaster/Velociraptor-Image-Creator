@@ -1,0 +1,15 @@
+{
+    "src_files": [
+    	"node_modules/chai/chai.js",
+    	"node_modules/angular/angular.js",
+        "node_modules/angular-mocks/angular-mocks.js",
+        "public/js/templates.js",
+    	"source/**/*.js",
+        "test/**/*.js"
+    ],
+    "framework": "mocha",
+    "launch_in_ci": ["Chrome"],
+    "launch_in_dev": ["Chrome"],
+    "reporting": "spec",
+    "on_start": "gulp scripts"
+}

@@ -67,7 +67,8 @@ body {
 	//     height: 200px;
 	// }
 
-	.inch {
+	.inch 
+	{
 		position: absolute;
 		bottom: 0;
 		right: 0;
@@ -75,6 +76,18 @@ body {
 		background-color: red;
 		width: 1in;
 		visibility: hidden;
+	}
+
+	.terminator 
+	{
+		padding: 9px 9px;
+		background-color: #ffffff;
+
+	}
+
+	input[type="range"] 
+	{
+  		width: 10%;
 	}
 
 }

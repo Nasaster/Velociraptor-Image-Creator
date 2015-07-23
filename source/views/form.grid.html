@@ -7,6 +7,7 @@
             <li>
                 <label> Grid color: </label>
                 <input type="color" class="form-control paok" ng-model="ctrl.model.gridColor">
+                <label><code class="terminator">{{ctrl.model.gridColor}}</code></label>
             </li>
         </ul>
         <ul>
@@ -16,6 +17,11 @@
                 <label> Large step: </label>
                 <input type="text" class="form-control paok" ng-model="ctrl.model.largeStep">
             </li>
+        </ul>
+        <ul>
+            <label class="md-only" for="stw">Stroke width</label>
+            <input type="range" ng-model="ctrl.model.stw" min="1" max="30" id="stw" />
+            <code>{{ctrl.model.stw}}</code>
         </ul>
     </div>
 </div>
