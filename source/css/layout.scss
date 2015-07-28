@@ -60,13 +60,6 @@ body {
 		width: 100%;	// always scale to fit
 	}
 
-	// .box
-	// {
-	//     display: block;
-	//     width: 200px;
-	//     height: 200px;
-	// }
-
 	.inch 
 	{
 		position: absolute;
@@ -80,7 +73,7 @@ body {
 
 	.terminator 
 	{
-		padding: 9px 9px;
+		//padding: 9px 9px;
 		background-color: #ffffff;
 
 	}
@@ -90,4 +83,10 @@ body {
   		width: 10%;
 	}
 
+	.vranger 
+	{
+  		margin-top: 50px;
+   		transform: rotate(270deg);
+  		-moz-transform: rotate(270deg); /*do same for other browsers if required*/
+	}
 }

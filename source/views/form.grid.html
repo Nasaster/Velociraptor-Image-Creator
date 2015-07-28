@@ -10,18 +10,25 @@
                 <label><code class="terminator">{{ctrl.model.gridColor}}</code></label>
             </li>
         </ul>
-        <ul>
+<!--         <ul>
             <li>
                 <label> Small step: </label>
                 <input type="text" class="form-control paok" ng-model="ctrl.model.smallStep">
                 <label> Large step: </label>
                 <input type="text" class="form-control paok" ng-model="ctrl.model.largeStep">
             </li>
-        </ul>
+        </ul> -->
         <ul>
-            <label class="md-only" for="stw">Stroke width</label>
-            <input type="range" ng-model="ctrl.model.stw" min="1" max="30" id="stw" />
-            <code>{{ctrl.model.stw}}</code>
+            <li>
+            <label class="md-only" for="stw">Amount of grid steps:</label>
+            <input type="range" class=" paok" ng-model="ctrl.model.gridStepAmount" min="1" max="15" id="stw" />
+            <code>{{ctrl.model.gridStepAmount}}</code>
+            </li>
+            <li>
+            <label class="md-only" for="stw">Amount of step subdivisions:</label>
+            <input type="range" class="paok vranger" ng-model="ctrl.model.gridSubdivisions" min="1" max="5" id="ste" />
+            <code>{{ctrl.model.gridSubdivisions}}</code>
+            </li>
         </ul>
     </div>
 </div>

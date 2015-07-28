@@ -8,26 +8,17 @@ app.controller('VelociraptorForm', [ '$rootScope', '$scope', function( $rootScop
 		width: 100,
 		height: 100,
 		unit: 'px',
-
 		transparent: false,
 		solidColor: '#7bbf60',
 		radius: 0,
-
 		rowAmount: 5,
 		columnAmount: 5,
 		blockColor: '#000000',
-
-		//noiseType: 'gradient',
 		checkered: false,
-		//vertColumn: '',
-		//horizColmn: '',
-
-		stw:'1',
-
 		grid: false,
 		gridColor: '#000000',
-		smallStep: 5,
-		largeStep: 10		
+		gridStepAmount: 5,
+		gridSubdivisions: 1	
 	};
 
 	// function invoked when the form is submitted

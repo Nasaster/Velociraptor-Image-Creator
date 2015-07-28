@@ -1,12 +1,17 @@
 // is subscribed to data modified by the FormController
 
-app.controller('VelociraptorPreview', function($scope, renderer) 
+app.controller('VelociraptorPreview', function($scope, $document, renderer) 
 {
-	//$scope.name = "VelociraptorPreview";
+	$scope.name = "VelociraptorPreview";
 
-	var canvas        = document.getElementById( "canvas" ),
+	var canvas        = $document[ 0 ].querySelector( "#canvas" ),
 	    ctx           = canvas.getContext( "2d" ),
 	    isTransparent = false;
+
+	var gridMarkerWidth     = 0,
+		gridMarkerHeight    = 0,
+	    gridMarkerSubWidth  = 0,
+	    gridMarkerSubHeight = 0;
      
 	// invoked whenever the FormController broadcasts a form submit
 	// over the $rootScope
@@ -52,17 +57,15 @@ app.controller('VelociraptorPreview', function($scope, renderer)
 
 	 	if ( data.grid ) {
 
-	 	 	renderer.createGridGenerator( ctx, data.width, data.height, data.smallStep, data.largeStep, data.gridColor );
+	 	 	renderer.createGridGenerator( ctx, data.width, data.height, gridMarkerWidth, gridMarkerHeight,
+	 	 								  gridMarkerSubWidth, gridMarkerSubHeight, data.gridColor, 1 );
 	 	}
 
-	 	//
-	 	//renderer.drawCircle( data.radius, data.solidColor, data.randColor );
-	 	//renderer.triangle  ( data.height, data.width, 	   data.solidColor, data.randColor );
 	});
 
 	// cache the DPI for this particular device / screen
 	// this is the amount of pixels that fits in an inch
-	var ppi = document.querySelector( ".inch" ).offsetWidth;
+	var ppi = $document[ 0 ].querySelector( ".inch" ).offsetWidth;
 	
 	console.log( "pixels per inch: " + ppi );
 
@@ -87,9 +90,16 @@ app.controller('VelociraptorPreview', function($scope, renderer)
 			data.width     = inchesToPixels( data.width );
 			data.height    = inchesToPixels( data.height );
 			data.radius    = inchesToPixels( data.radius );
-			data.smallStep = inchesToPixels( data.smallStep );
-			data.largeStep = inchesToPixels( data.largeStep );
 		}
+
+		// grid markers are relative to the full image width
+		// grid markers specify the amount of steps present in this image
+
+		gridMarkerWidth     = data.width / data.gridStepAmount;
+		gridMarkerHeight	= data.height / data.gridStepAmount;
+		gridMarkerSubWidth  = gridMarkerWidth / data.gridSubdivisions;
+		gridMarkerSubHeight = gridMarkerHeight / data.gridSubdivisions;
+
 		return data;
 	}
 
@@ -169,26 +179,67 @@ app.factory('renderer', function()
     		}
     	},
 
-        createGridGenerator( ctx, canvasWidth, canvasHeight, smallStep, largeStep, gridColor, gridPixelSize )
+        createGridGenerator( ctx, canvasWidth, canvasHeight, gridMarkerWidth, gridMarkerHeight,
+        					 gridMarkerSubWidth, gridMarkerSubHeight, gridColor, gridPixelSize )
 	    {
 
-		 /*
-		  * i is used for both x and y to draw
-	 	  * a line every 5 pixels starting at
-	 	  * .5 to offset the canvas edges
-	 	  */
+   			// calculate center coordinates
 
-			for(var i = .5; i < canvasWidth || i < canvasHeight; i += 20) {
-            // draw horizontal lines
-            ctx.moveTo( i, 0 );
-            ctx.lineTo( i, canvasHeight);
-            // draw vertical lines
-            ctx.moveTo( 0, i );
-            ctx.lineTo( canvasWidth, i);
+   			var x = canvasWidth  / 2  - gridPixelSize / 2;
+   			var y = canvasHeight / 2  - gridPixelSize / 2;
+
+   			// draw horizontal line
+            
+        	ctx.moveTo( 0, y );
+        	ctx.lineTo( canvasWidth, y );
+
+        	// draw vertical line
+
+        	ctx.moveTo( x, 0 );
+        	ctx.lineTo( x, canvasHeight );
+
+        	// draw all horizontal grid steps
+
+        	var markerHeight    = canvasHeight / 20; // height of an individual marker
+        	var markerSubHeight = markerHeight / 2;
+        	y = canvasHeight / 2 - markerHeight / 2;
+        	var subX;
+        	var subY = canvasHeight / 2 - markerSubHeight / 2;
+
+        	for ( x = 0; x < canvasWidth; x += gridMarkerWidth )
+        	{
+    			ctx.moveTo( x, y );
+        		ctx.lineTo( x, y + markerHeight );
+
+        		for ( subX = x; subX < ( x + gridMarkerWidth ); subX += gridMarkerSubWidth )
+        		{
+        			ctx.moveTo( subX, subY );
+        			ctx.lineTo( subX, subY + markerSubHeight );
+        		}	
         	}
-        
-        
 
+        	// draw all vertical grid steps
+
+        	var markerWidth = markerHeight; // width of an individual marker
+        	var markerSubWidth = markerWidth / 2;
+        	x = canvasWidth / 2 - markerWidth / 2;
+        	subX = canvasWidth / 2 - markerSubWidth / 2;
+
+        	for ( y = 0; y < canvasHeight; y += gridMarkerHeight )
+        	{
+    			ctx.moveTo( x, y );
+        		ctx.lineTo( x + markerWidth, y );
+
+        		for ( subY = y; subY < ( y + gridMarkerHeight ); subY += gridMarkerSubHeight )
+        		{
+        			ctx.moveTo( subX, subY );
+        			ctx.lineTo( subX + markerSubWidth, subY );
+        		}	
+        	}
+        	
+			ctx.strokeStyle = gridColor;
+			ctx.stroke();
+        	
 			ctx.strokeStyle = gridColor;
 			ctx.stroke();
 
@@ -219,43 +270,6 @@ app.factory('renderer', function()
 			ctx.quadraticCurveTo(x, y, x + radius, y);
 			ctx.closePath();
 		    ctx.fill();
-        },
-
-        triangle: function( ctx, width, height, color, randomColor)
-        {
-			ctx.moveTo(120, 120);
-			ctx.lineTo(120, 200);
-			ctx.lineTo(200, 200);
-			ctx.closePath();
-			 
-			// the fill color
-			ctx.fillStyle = color || randomColor;;
-			ctx.fill();
-        },
-
-        drawCircle : function( ctx, radius, color, randomColor )
-        {
-            var x = canvas.width / 2;
-            var y = canvas.height / 2;
-            var startAngle = 0 * Math.PI;
-            var endAngle;
-            var counterClockwise = false;
-            
-
-            var getDeg = function(inPerc) {
-                var aPerc = (inPerc * 0.02);
-                console.log('aPerc = ' + aPerc);
-                endAngle = aPerc * Math.PI;
-                console.log("end angle = " + endAngle);
-                console.log("start angle = " + startAngle);
-                ctx.beginPath();
-                ctx.arc(x, y, radius, startAngle, endAngle, counterClockwise);
-                ctx.lineWidth = 10;
-                ctx.strokeStyle = color || randomColor;
-                ctx.stroke();
-                ctx.fill();
-            }
-            getDeg( 100 );
         }
     };
     return renderer;

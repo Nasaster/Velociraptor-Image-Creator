@@ -32,23 +32,16 @@ describe( 'VelociraptorForm', function ()
 		var ctrl = createController();
 
 		var model = ctrl.model;
-
 		expect( model.width ).to.be.a( "number" );
 		expect( model.height ).to.be.a( "number" );
 		expect( model.unit ).to.be.a( "string" );
-		
 		expect( model.transparent ).to.be.a( "boolean" );
-		
 		expect( model.solidColor ).to.be.a( "string" );
-		
 		expect( model.radius ).to.be.a( "number" );
-
 		expect( model.checkered ).to.be.a( "boolean" );
 		expect( model.rowAmount ).to.be.a( "number" );
 		expect( model.columnAmount ).to.be.a( "number" );
 		expect( model.blockColor ).to.be.a( "string" );
-
-		
 		expect( model.grid ).to.be.a( "boolean" );
 		expect( model.gridColor ).to.be.a( "string" );
 		
@@ -62,9 +55,9 @@ describe( 'VelociraptorPreview', function ()
 {
 	// reference to our Angular application (see app.js)
 	beforeEach( module( 'Velociraptor' ));
-    var $scope, createController;
+    var $scope, directive, createController;
 
-    beforeEach( inject( function ( $rootScope, $controller )
+    beforeEach( inject( function ( $rootScope, $compile, $controller, $templateCache )
     {
         $scope = $rootScope.$new();
 
@@ -74,10 +67,15 @@ describe( 'VelociraptorPreview', function ()
                 '$scope': $scope
             });
         };
+
+        // Compile and spawn the HTML template that is attached to ng-controller VelociraptorPreview
+	    directive = $compile( $templateCache.get( "views/preview.html" ))( $scope );
+        $scope.$apply(); // binds VelociraptorPreview to the template
     }));
 
     it( "should print the correct name", function () 
     {
+    	// console.log(directive);return;
     // 	var ctrl = createController();
     //     assert.strictEqual(ctrl.name, "VelociraptorPreview",
     //     	"expected name to equal 'VelociraptorPreview', got '" + ctrl.name + "' instead" );
