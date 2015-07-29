@@ -154,7 +154,7 @@ app.factory('renderer', function()
 		    }
     	},
 
-    	createCheckeredPattern( ctx, canvasWidth, canvasHeight, amountOfRows, amountOfColumns, blockColor )
+    	createCheckeredPattern : function( ctx, canvasWidth, canvasHeight, amountOfRows, amountOfColumns, blockColor )
     	{
     		var blockWidth  = canvasWidth  / amountOfColumns;
     		var blockHeight = canvasHeight / amountOfRows;
@@ -179,8 +179,8 @@ app.factory('renderer', function()
     		}
     	},
 
-        createGridGenerator( ctx, canvasWidth, canvasHeight, gridMarkerWidth, gridMarkerHeight,
-        					 gridMarkerSubWidth, gridMarkerSubHeight, gridColor, gridPixelSize )
+        createGridGenerator : function( ctx, canvasWidth, canvasHeight, gridMarkerWidth, gridMarkerHeight,
+        					 			gridMarkerSubWidth, gridMarkerSubHeight, gridColor, gridPixelSize )
 	    {
 
    			// calculate center coordinates
