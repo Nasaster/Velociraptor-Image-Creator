@@ -29,5 +29,4 @@ app.controller('VelociraptorForm', [ '$rootScope', '$scope', function( $rootScop
 		$rootScope.$broadcast( 'update', this.model );
 	};
 
-		//console.log( "VelociraptorForm is active!!" );
 }]);

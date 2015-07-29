@@ -253,7 +253,6 @@ app.factory('renderer', function()
             console.log("square to draw: " + width + "x" + height + " at " + x + " x " + y );
             
             ctx.fillStyle = color;
-            //ctx.fillRect( x, y, width, height);
         
 			if (typeof radius === "undefined") {
 			  radius = 0;

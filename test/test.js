@@ -69,8 +69,8 @@ describe( 'VelociraptorPreview', function ()
         };
 
         // Compile and spawn the HTML template that is attached to ng-controller VelociraptorPreview
-	    directive = $compile( $templateCache.get( "views/preview.html" ))( $scope );
-        $scope.$apply(); // binds VelociraptorPreview to the template
+	   // directive = $compile( $templateCache.get( "views/preview.html" ))( $scope );
+       // $scope.$apply(); // binds VelociraptorPreview to the template
     }));
 
     it( "should print the correct name", function () 
